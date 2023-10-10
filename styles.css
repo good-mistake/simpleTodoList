@@ -1,0 +1,17 @@
+input {
+  border-radius: 0.5rem;
+}
+.red {
+  border-color: red;
+}
+ul li {
+  text-decoration: none;
+  list-style: none;
+  text-align: center;
+  margin-top: 1rem;
+  padding: 10px;
+  border-bottom: 1px solid rgb(216, 215, 215);
+}
+div {
+  text-align: center;
+}
