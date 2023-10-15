@@ -3,12 +3,21 @@ const btn = document.getElementById("btn");
 const container = document.querySelector(".container");
 const ul = document.querySelector("ul");
 let myList = [];
-
+function clearInput() {
+  inp.value = "";
+}
+const syncfunc = () => {
+  const allLists = JSON.parse(localStorage.getItem("List")) || [];
+  myList = allLists;
+  for (let i = 0; i < allLists.length; i++) {
+    const all = allLists[i].title;
+    createElements(all);
+  }
+};
 const createElements = (val) => {
   const removeBtn = document.createElement("button");
   const item = document.createElement("li");
   removeBtn.textContent = "Remove";
-
   val > "" ? ul.appendChild(item) : [];
   item.textContent = val;
   item.append(removeBtn);
@@ -24,17 +33,7 @@ const createElements = (val) => {
     }
   }
 };
-function clearInput() {
-  inp.value = "";
-}
-const syncfunc = () => {
-  const allLists = JSON.parse(localStorage.getItem("List")) || [];
-  myList = allLists;
-  for (let i = 0; i < allLists.length; i++) {
-    const all = allLists[i].title;
-    createElements(all);
-  }
-};
+
 const save = (item) => {
   if (item) {
     const nextitem = {
@@ -42,7 +41,6 @@ const save = (item) => {
     };
     myList.push(nextitem);
   }
-
   const list = JSON.stringify(myList);
   localStorage.setItem("List", list);
 };
@@ -52,11 +50,10 @@ function setupTodo() {
     if (val === "") {
       inp.classList.add("red");
     } else {
-      createElements(val);
       save({
         title: val,
       });
-
+      createElements(val);
       clearInput();
       inp.classList.remove("red");
       console.log(myList);
