@@ -1,7 +1,8 @@
 const inp = document.getElementById("input");
 const btn = document.getElementById("btn");
-const container = document.querySelector(".container");
+const container = document.querySelector(".todoContainer");
 const ul = document.querySelector("ul");
+const searchContainer = document.querySelector(".searchContainer");
 let myList = [];
 function clearInput() {
   inp.value = "";
@@ -18,6 +19,7 @@ const createElements = (val) => {
   const removeBtn = document.createElement("button");
   const item = document.createElement("li");
   removeBtn.textContent = "Remove";
+
   val > "" ? ul.appendChild(item) : [];
   item.textContent = val;
   item.append(removeBtn);
@@ -67,5 +69,27 @@ function init() {
   setupTodo();
   console.log(myList);
 }
-
+const search = document.getElementById("searchInput");
+search.addEventListener("input", (e) => {
+  let inputResult = e.target.value;
+  inputResult.toLowerCase();
+  // for (const i of myList) {
+  //   // if (inputResult === i.title.toLowerCase()) {
+  //   //   console.log("qwqwqe");
+  //   //   const searchResult = document.createElement("div");
+  //   //   searchResult.innerText = i.title;
+  //   //   container.append(searchResult);
+  //   //   searchResult.classList.add("searchResult");
+  //   // }
+  // }
+  for (const i of myList) {
+    if (i.title.includes(inputResult)) {
+      console.log(i.title);
+      const searchResult = document.createElement("div");
+      searchResult.textContent = i.title;
+      searchResult.classList.add("ss");
+      searchContainer.append(searchResult);
+    }
+  }
+});
 init();
